@@ -1,0 +1,228 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ethoscrawl"
+version = "0.1.0"
+description = "Ethical, AI-Powered Data Collection for the Future"
+readme = "README.md"
+license = {text = "AGPL-3.0"}
+authors = [
+    {name = "EthosCrawl Team", email = "hello@ethoscrawl.dev"}
+]
+maintainers = [
+    {name = "Community Maintainers", email = "maintainers@ethoscrawl.dev"}
+]
+keywords = [
+    "web-scraping",
+    "ai",
+    "privacy",
+    "ethics",
+    "data-collection",
+    "machine-learning",
+    "compliance",
+    "gdpr",
+    "ccpa",
+    "adaptive-scraping",
+    "edge-computing",
+    "transparency",
+    "data-ethics",
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "scrapling>=0.3.14",
+    "httpx>=0.25.0",
+    "pydantic>=2.0.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "orjson>=3.9.0",
+    "python-multipart>=0.0.6",
+]
+
+[project.optional-dependencies]
+ai = [
+    "openai>=1.0.0",
+    "anthropic>=0.25.0",
+    "langchain>=0.1.0",
+    "chromadb>=0.4.0",
+    "sentence-transformers>=2.2.0",
+    "nltk>=3.8.0",
+    "spacy>=3.7.0",
+]
+
+privacy = [
+    "diffprivlib>=0.6.0",
+    "faker>=20.0.0",
+    "cryptography>=41.0.0",
+    "presidio-analyzer>=2.2.0",
+    "presidio-anonymizer>=2.2.0",
+]
+
+edge = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "websockets>=12.0",
+    "redis>=5.0.0",
+    "celery>=5.3.0",
+]
+
+analytics = [
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "scikit-learn>=1.3.0",
+]
+
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.6.0",
+    "pre-commit>=3.5.0",
+    "ipython>=8.17.0",
+]
+
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+    "mkdocstrings[python]>=0.24.0",
+    "mkdocs-jupyter>=0.24.0",
+]
+
+all = [
+    "ethoscrawl[ai,privacy,edge,analytics]",
+]
+
+[project.urls]
+Homepage = "https://ethoscrawl.dev"
+Documentation = "https://docs.ethoscrawl.dev"
+Repository = "https://github.com/ethoscrawl/ethoscrawl"
+Changelog = "https://github.com/ethoscrawl/ethoscrawl/releases"
+"Bug Tracker" = "https://github.com/ethoscrawl/ethoscrawl/issues"
+Discord = "https://discord.gg/ethoscrawl"
+Twitter = "https://twitter.com/EthosCrawl"
+
+[project.scripts]
+ethoscrawl = "ethoscrawl.cli:main"
+
+[project.entry-points."ethoscrawl.plugins"]
+ai = "ethoscrawl.integrations.ai:AIProcessor"
+privacy = "ethoscrawl.core.privacy:PrivacyEngine"
+ethics = "ethoscrawl.core.ethics:EthicalFramework"
+edge = "ethoscrawl.edge:EdgeManager"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ethoscrawl*"]
+
+[tool.setuptools.package-data]
+"ethoscrawl" = ["py.typed", "data/*.json", "templates/*.html"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/*" = ["S101"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "click.*",
+    "rich.*",
+    "pydantic.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--tb=short",
+]
+asyncio_mode = "auto"
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning",
+]
+
+[project.gui-scripts]
+ethoscrawl-gui = "ethoscrawl.gui:main"

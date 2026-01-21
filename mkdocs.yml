@@ -1,0 +1,100 @@
+site_name: EthosCrawl
+site_description: Ethical Web Scraping Framework with Privacy Preservation and Compliance
+site_url: https://YOUR_USERNAME.github.io/ethoscrawl/
+repo_url: https://github.com/YOUR_USERNAME/ethoscrawl
+repo_name: YOUR_USERNAME/ethoscrawl
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: installation.md
+    - Quick Start: quickstart.md
+    - Basic Concepts: concepts.md
+  - User Guide:
+    - Configuration: configuration.md
+    - Privacy Levels: privacy.md
+    - Ethical Compliance: compliance.md
+    - API Reference: api.md
+  - Advanced Topics:
+    - Custom Extensions: extensions.md
+    - Performance Tuning: performance.md
+    - Deployment: deployment.md
+    - Troubleshooting: troubleshooting.md
+  - Community:
+    - Contributing: ../CONTRIBUTING.md
+    - Code of Conduct: ../.github/CODE_OF_CONDUCT.md
+    - FAQ: faq.md
+    - Changelog: ../CHANGELOG.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/YOUR_USERNAME/ethoscrawl
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/ethoscrawl/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/YOUR_USERNAME
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/YOUR_INVITE
+
+copyright: |
+  &copy; 2024 EthosCrawl Contributors. Distributed under the MIT License.
+  
+  <small>
+    Built with <a href="https://www.mkdocs.org/" target="_blank" rel="noopener">MkDocs</a> 
+    and <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs</a>.
+  </small>
+
+extra_css:
+  - stylesheets/extra.css
